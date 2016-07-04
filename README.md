@@ -13,11 +13,11 @@ Ideally PhantomJS would be employed to automate the filtering process as well as
 
 Only one function exported with signature (apiKey, query, start).
 
-The api limits to 25 results each time. So the start arg allows pagination (i.e. for page 2 start at 25).
+The api limits to 25 results each time. So the start arg allows pagination (i.e. for page 2 start at 26).
 
 Provide API key (required)
 ```javascript
 const wmPricer = require('wm-pricer')
 
-wmPricer('someapikey', '4k tv', 0)
+wmPricer('someapikey', '4k tv', 1)
 ```
