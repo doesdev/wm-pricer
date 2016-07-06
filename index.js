@@ -7,11 +7,17 @@ const cheerio = require('cheerio')
 const keepProps = ['itemId', 'name', 'msrp', 'salePrice', 'modelNumber', 'upc']
 
 // get some stuff and things
-module.exports = (apiKey, zip, query, start, cb) => {
-  let wm = wmApi(apiKey)
+module.exports = (opts, cb) => {
+  let apiKeyErr = 'API key is required'
+  if (!opts.apiKey) return cb ? cb(apiKeyErr) : console.error(apiKeyErr)
+  let zip = opts.zip || 33803
+  let query = opts.query || '4k tv'
+  let limit = opts.limit || 25
+  let start = opts.start || 1
+  let wm = wmApi(opts.apiKey)
   let out = []
   let listLength
-  wm.search(query, {numItems: 5, start}).then((list) => {
+  wm.search(query, {numItems: limit, start}).then((list) => {
     listLength = list.items.length
     list.items.forEach((item) => getBsHtml(item))
   })

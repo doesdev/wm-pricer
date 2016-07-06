@@ -9,13 +9,13 @@ An inelegant helper for checking brickseek for Walmart inventory based on a quer
 
 ## usage
 
-Only one function exported with signature (apiKey, zip, query, start, callback). Callback will be invoked with (err, data) with data being an array of item objects.
+Only one function exported with signature (opts, callback). Callback will be invoked with (err, data) with data being an array of item objects.
 
 The api limits to 25 results each time. So the start arg allows pagination (i.e. for page 2 start at 26).
 
 Provide API key (required)
 ```javascript
 const wmPricer = require('wm-pricer')
-
-wmPricer('someapikey', 33803, '4k tv', 1, console.log)
+const opts = {apiKey: 'someapikey', zip: 33803, query: '4k tv', start: 1}
+wmPricer(opts, console.log)
 ```
