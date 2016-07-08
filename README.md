@@ -7,7 +7,7 @@ An inelegant helper for checking brickseek for Walmart inventory based on a quer
 ## install
 `npm i wm-pricer`
 
-## usage
+## programmatic usage
 
 Only one function exported with signature (opts, callback). Callback will be invoked with (err, data) with data being an array of item objects.
 
@@ -18,4 +18,38 @@ Provide API key (required)
 const wmPricer = require('wm-pricer')
 const opts = {apiKey: 'someapikey', zip: 33803, query: '4k tv', start: 1}
 wmPricer(opts, console.log)
+```
+
+## cli usage
+`npm i -g wm-pricer`
+
+`wmp -h`
+
+or
+
+```
+WM-Pricer
+===========
+usage:
+  wmp [options]
+  wmp [zip] query
+
+options:
+  -r, --remember  Store options (i.e. store apiKey / zip for future calls)
+  -k, --apiKey    Required to be set either when called or stored for subsequent calls
+  -q, --query     Search terms (use double quotes if query contains whitespace)
+  -z, --zip       Zip code to search within (50 mile radius)
+  -l, --limit     Number of results to return (up to 25, limited by WM API)
+  -s, --start     Result to start at, for pagination
+  -d, --diff      In store price difference threshold
+    (i.e. only show results with X percent lower price in store than online)
+
+To store apiKey and optionally zip
+  ~ wmp -r -k xyz123 -z 33803
+
+If apiKey is stored and no other options supplied you can call with
+  ~ wmp zip query
+
+If apiKey and zip is stored and no other options supplied you can call with
+  ~ wmp query
 ```
