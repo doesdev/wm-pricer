@@ -95,6 +95,7 @@ wmPricer(opts, (err, data) => {
     aryOut[i] = {}
     propsOrder.forEach((k) => aryOut[i][k] = e[k])
   })
-  aryOut.filter((i) => i).sort((a, b) => b.variancePercent - a.variancePercent)
+  aryOut = aryOut.filter((i) => i)
+  aryOut.sort((a, b) => b.variancePercent - a.variancePercent)
   console.log(prettyJson.render(aryOut, pjOpts))
 })
