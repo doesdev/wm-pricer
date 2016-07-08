@@ -21,10 +21,37 @@ const propsOrder = [
   'bsUrl',
   'inventory'
 ]
+const man = `
+WM-Pricer
+===========
+usage:
+  wmp [options]
+  wmp [zip] query
+
+options:
+  -r, --remember  Store options (i.e. store apiKey / zip for future calls)
+  -k, --apiKey    Required to be set either when called or stored for subsequent calls
+  -q, --query     Search terms (use double quotes if query contains whitespace)
+  -z, --zip       Zip code to search within (50 mile radius)
+  -l, --limit     Number of results to return (up to 25, limited by WM API)
+  -s, --start     Result to start at, for pagination
+  -d, --diff      In store price difference threshold
+    (i.e. only show results with X percent lower price in store than online)
+
+To store apiKey and optionally zip
+  ~ wmp -r -k xyz123 -z 33803
+
+If apiKey is stored and no other options supplied you can call with
+  ~ wmp zip query
+
+If apiKey and zip is stored and no other options supplied you can call with
+  ~ wmp query
+`
 
 // Establish params
 let env, apiKey, query, zip, limit, start, store, fromStored, diff
 process.argv.forEach((e, i) => {
+  if (e.match(/-h|--help/)) console.log(man)
   if (e.match(/-r|--remember/)) store = true
   if (e.match(/-k|--apiKey/)) apiKey = process.argv[i + 1]
   else if (e.match(/-q|--query/)) query = process.argv[i + 1]
@@ -64,6 +91,7 @@ wmPricer(opts, (err, data) => {
     if (diff && (!isNumber(e.variancePercent) || e.variancePercent < diff)) {
       return null
     }
+    e.inventory.sort((a, b) => a.price - b.price)
     aryOut[i] = {}
     propsOrder.forEach((k) => aryOut[i][k] = e[k])
   })
