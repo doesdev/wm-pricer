@@ -40,3 +40,5 @@ node_modules
 
 # Temporary files
 tmp/
+
+env.json
