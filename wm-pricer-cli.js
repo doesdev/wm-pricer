@@ -71,7 +71,7 @@ if (!(apiKey || query || zip || limit || page)) {
   zip = process.argv[firstIsNum ? 2 : 3]
   query = process.argv[firstIsNum ? 3 : 2]
 }
-let start = ((page || 1) * (limit || 25) + 1) - limit
+let start = ((page || 1) * (limit || 25) + 1) - (limit || 25)
 const opts = {apiKey, query, zip, limit, start}
 
 // Store vars if that flag is set
