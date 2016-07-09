@@ -34,7 +34,7 @@ options:
   -q, --query     Search terms (use double quotes if query contains whitespace)
   -z, --zip       Zip code to search within (50 mile radius)
   -l, --limit     Number of results to return (up to 25, limited by WM API)
-  -s, --start     Result to start at, for pagination
+  -p, --page      Result set page to return
   -d, --diff      In store price difference threshold
     (i.e. only show results with X percent lower price in store than online)
 
@@ -49,15 +49,15 @@ If apiKey and zip is stored and no other options supplied you can call with
 `
 
 // Establish params
-let env, apiKey, query, zip, limit, start, store, fromStored, diff
+let env, apiKey, query, zip, limit, page, store, fromStored, diff
 process.argv.forEach((e, i) => {
   if (e.match(/-h|--help/)) console.log(man)
   if (e.match(/-r|--remember/)) store = true
   if (e.match(/-k|--apiKey/)) apiKey = process.argv[i + 1]
   else if (e.match(/-q|--query/)) query = process.argv[i + 1]
   else if (e.match(/-z|--zip/)) zip = process.argv[i + 1]
-  else if (e.match(/-l|--limit/)) limit = process.argv[i + 1]
-  else if (e.match(/-s|--start/)) start = process.argv[i + 1]
+  else if (e.match(/-l|--limit/)) limit = parseInt(process.argv[i + 1], 10)
+  else if (e.match(/-p|--page/)) page = parseInt(process.argv[i + 1], 10)
   else if (e.match(/-d|--diff/)) diff = parseInt(process.argv[i + 1], 10)
 })
 try {
@@ -66,12 +66,12 @@ try {
 } catch (e) {
   env = process.env || {}
 }
-if (!(apiKey || query || zip || limit || start)) {
+if (!(apiKey || query || zip || limit || page)) {
   let firstIsNum = process.argv[2].match(/^\d+$/)
   zip = process.argv[firstIsNum ? 2 : 3]
   query = process.argv[firstIsNum ? 3 : 2]
 }
-const opts = {apiKey, query, zip, limit, start}
+const opts = {apiKey, query, zip, limit, start: (page || 0) * (limit || 25) + 1}
 
 // Store vars if that flag is set
 if (store) {
