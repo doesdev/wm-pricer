@@ -1,6 +1,6 @@
 {
   "name": "wm-pricer",
-  "version": "2.1.9",
+  "version": "2.2.0",
   "description": "Find stuff and things at good prices",
   "main": "index.js",
   "bin": {
