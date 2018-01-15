@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/musocrat/wm-pricer#readme",
   "dependencies": {
-    "cheerio": "^0.20.0",
-    "prettyjson": "^1.1.3",
+    "cheerio": "^1.0.0-rc.2",
+    "prettyjson": "^1.2.1",
     "walmart": "0.0.4"
   }
 }
