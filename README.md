@@ -15,9 +15,18 @@ The api limits to 25 results each time. So the start arg allows pagination (i.e.
 
 Provide API key (required)
 ```javascript
-const wmPricer = require('wm-pricer')
-const opts = {apiKey: 'someapikey', zip: 33803, query: '4k tv', start: 1}
-wmPricer(opts, console.log)
+const WmPricerApi = require('wm-pricer').api
+const secrets = require('./secrets.json')
+const opts = {zip: 33803, query: '4k tv', start: 1}
+
+const main = async () => {
+  let data = await new Promise((resolve, reject) => {
+    let wmp = WmPricerApi.new(secrets.apiKey)
+    wmp.on('error', reject)
+    wmp.once('store-query-done', resolve)
+    wmp.storeQuery(opts)
+  })
+}
 ```
 
 ## cli usage
