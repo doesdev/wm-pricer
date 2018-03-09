@@ -80,11 +80,13 @@ let init = () => {
 
   // Store vars if that flag is set
   if (store) {
-    if (fromStored) optsAry.forEach((k) => opts[k] = opts[k] || env[k])
+    if (fromStored) optsAry.forEach((k) => { opts[k] = opts[k] || env[k] })
     fs.writeFileSync(path.resolve(__dirname, 'env.json'), JSON.stringify(opts))
   }
   // Do that dang thing
-  if (!(store && fromStored)) optsAry.forEach((k) => opts[k] = opts[k] || env[k])
+  if (!(store && fromStored)) {
+    optsAry.forEach((k) => { opts[k] = opts[k] || env[k] })
+  }
   if (sq) {
     if (diff) opts.minDiff = diff
     let wmp = wmPricer.api.new(opts)
@@ -105,7 +107,7 @@ let init = () => {
       }
       e.inventory.sort((a, b) => a.price - b.price)
       aryOut[i] = {}
-      propsOrder.forEach((k) => aryOut[i][k] = e[k])
+      propsOrder.forEach((k) => { aryOut[i][k] = e[k] })
     })
     aryOut = aryOut.filter((i) => i)
     aryOut.sort((a, b) => b.variancePercent - a.variancePercent)
