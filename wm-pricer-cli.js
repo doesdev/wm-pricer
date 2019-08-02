@@ -7,7 +7,7 @@ const prettyJson = require('prettyjson')
 const fs = require('fs')
 const path = require('path')
 const optsAry = ['apiKey', 'query', 'zip', 'limit', 'start']
-const pjOpts = {numberColor: 'yellow'}
+const pjOpts = { numberColor: 'yellow' }
 const isNumber = (n) => Number.isFinite(n) && !Number.isNaN(n)
 const propsOrder = [
   'name',
@@ -49,7 +49,7 @@ If apiKey and zip is stored and no other options supplied you can call with
   ~ wmp query
 `
 
-let init = () => {
+const init = () => {
   // Establish params
   let env, apiKey, query, zip, limit, page, store, fromStored, diff, sq, help
   process.argv.forEach((e, i) => {
@@ -71,12 +71,12 @@ let init = () => {
     env = process.env || {}
   }
   if (!(apiKey || query || zip || limit || page)) {
-    let firstIsNum = process.argv[2].match(/^\d+$/)
+    const firstIsNum = process.argv[2].match(/^\d+$/)
     zip = process.argv[firstIsNum ? 2 : 3]
     query = process.argv[firstIsNum ? 3 : 2]
   }
-  let start = ((page || 1) * (limit || 25) + 1) - (limit || 25)
-  const opts = {apiKey, query, zip, limit, start}
+  const start = ((page || 1) * (limit || 25) + 1) - (limit || 25)
+  const opts = { apiKey, query, zip, limit, start }
 
   // Store vars if that flag is set
   if (store) {
@@ -89,7 +89,7 @@ let init = () => {
   }
   if (sq) {
     if (diff) opts.minDiff = diff
-    let wmp = wmPricer.api.new(opts)
+    const wmp = wmPricer.api.new(opts)
     wmp.on('store-query-done', (d) => console.log(prettyJson.render(d, pjOpts)))
     wmp.storeQuery(opts)
     return

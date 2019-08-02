@@ -3,13 +3,18 @@
   "version": "4.0.0",
   "description": "Find stuff and things at good prices",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "wm-pricer-cli.js",
+    "lib/wm-pricer.js",
+  ],
   "bin": {
     "wmpricer": "wm-pricer-cli.js",
     "wmPricer": "wm-pricer-cli.js",
     "wmp": "wm-pricer-cli.js"
   },
   "scripts": {
-    "test": "ava --verbose"
+    "test": "mvt --verbose"
   },
   "repository": {
     "type": "git",
@@ -32,6 +37,6 @@
     "walmart": "0.0.4"
   },
   "devDependencies": {
-    "ava": "^0.25.0"
+    "mvt": "^4.0.0"
   }
 }
