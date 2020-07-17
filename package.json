@@ -6,7 +6,7 @@
   "files": [
     "index.js",
     "wm-pricer-cli.js",
-    "lib/wm-pricer.js",
+    "lib/wm-pricer.js"
   ],
   "bin": {
     "wmpricer": "wm-pricer-cli.js",
