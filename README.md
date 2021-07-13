@@ -1,3 +1,6 @@
+# Archived
+This project is no longer maintained and is assumed to not work, given the underlying APIs have undergone changes that this has not been kept up to date with.
+
 # wm-pricer   [![npm version](https://badge.fury.io/js/wm-pricer.svg)](http://badge.fury.io/js/wm-pricer)   [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 An inelegant helper for checking brickseek for Walmart inventory based on a query to Walmart API.
